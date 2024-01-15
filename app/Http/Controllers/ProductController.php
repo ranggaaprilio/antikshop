@@ -12,10 +12,11 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($paginate = 10)
     {
         //return view
         return view('product.index', [
+            //add pagination
             'products' => Products::class,
         ]);
     }

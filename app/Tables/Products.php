@@ -14,9 +14,13 @@ class Products extends AbstractTable
      *
      * @return void
      */
-    public function __construct()
+
+    // private $paginate=10;
+    public function __construct(Request $request)
     {
-        //
+        // set pagination
+        // $this->paginate = $request->query('perPage');
+
     }
 
     /**
@@ -36,7 +40,7 @@ class Products extends AbstractTable
      */
     public function for()
     {
-        return Product::query();
+        return Product::query()->paginate(10);
     }
 
     /**
@@ -48,12 +52,16 @@ class Products extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(columns: ['id'])
+            ->withGlobalSearch(columns: ['id','name'])
             ->column('id', sortable: true)
             ->column('name', sortable: true)
             ->column('description', sortable: true)
             ->column('price', sortable: true)
-            ->column('stock', sortable: true);
+            ->column('stock', sortable: true)
+            ->perPageOptions([10])
+            ->bulkAction('Delete');
+            // ->perPage(5);
+            // ->perPageOptions([5,50, 100, 200]);
 
             // ->searchInput()
             // ->selectFilter()

@@ -4,7 +4,6 @@
             {{ __('Product') }}
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -57,12 +56,28 @@
                             {{-- categories --}}
                             <div class="mb-4">
                                 <label for="categories" class="sr-only">Categories</label>
-                                <select name="categories[]" id="categories" class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('categories') border-red-500 @enderror" multiple>
+                                <select name="categories" id="categories" class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('categories') border-red-500 @enderror" aria-placeholder="Please Select Categories">
+                                    <option value="" class="text-slate-700">Please Select Categories</option>
                                     @foreach ($categories as $category)
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
                                 @error('categories')
+                                    <div class="text-red-500 mt-2 text-sm">
+                                        {{$message}}
+                                    </div>
+                                @enderror
+                            </div>
+                            {{-- upload multiple image--}}
+                            <div class="mb-4">
+                                <label for="image" class="sr-only">Image</label>
+                                <input type="file" name="image[]" id="image" placeholder="Your Product image" class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('image') border-red-500 @enderror" value="{{old('image')}}" multiple>
+                                {{-- create image view when upload image --}}
+                                <div class="flex justify-center">
+                                    <div class="flex flex-wrap justify-center" id="preview"></div>
+                                </div>
+
+                                @error('image')
                                     <div class="text-red-500 mt-2 text-sm">
                                         {{$message}}
                                     </div>
@@ -78,7 +93,8 @@
                                     </div>
                                 @enderror
                             </div>
-                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Product</button>
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Add Product</button>
+                            <button type="cancel" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"><Link href="{{route('product.index')}}">Back</Link></button>
                         </form>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Tables\Products;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -27,6 +28,8 @@ class ProductController extends Controller
     public function create()
     {
         //
+        $categories = Category::all();
+        return view('product.create', compact('categories'));
     }
 
     /**

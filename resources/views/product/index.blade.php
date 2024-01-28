@@ -11,7 +11,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="mb-4 flex justify-between">
                        <h3 class="font-bold text-2xl">List Of Product</h3>
-                       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Product</button>
+                       <Link href="{{route('product.create')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Product</Link>
                     </div>
                     <div>
                         <x-splade-table :for="$products" />

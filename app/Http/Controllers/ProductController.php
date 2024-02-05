@@ -10,6 +10,7 @@ use ProtoneMedia\Splade\FormBuilder\File;
 use ProtoneMedia\Splade\FormBuilder\Textarea;
 use ProtoneMedia\Splade\FormBuilder\Submit;
 use ProtoneMedia\Splade\SpladeForm;
+use ProtoneMedia\Splade\FileUploads\HandleSpladeFileUploads;
 use App\Models\Product;
 use App\Tables\Products;
 use App\Models\Category;
@@ -36,17 +37,17 @@ class ProductController extends Controller
         //
         $form = SpladeForm::make()
         ->action(route('product.store'))
+        //add multipart/form-data enctype
         ->fields([
             Input::make('name')->class('mt-4')->label('Name of Product'),
             Input::make('slug')->class('mt-4')->label('Slug'),
             Input::make('price')->class('mt-4')->label('Price'),
             Input::make('stok')->class('mt-4')->label('Stok'),
             Select::make('category_id')->class('mt-4')->label('Category')->options(Category::all()->pluck('name', 'id')->toArray()),
-            File::make('image')->multiple()->filepond()->class('mt-4')->label('Upload Your Image'),
+            File::make('images[]')->multiple()->filepond()->preview()->class('mt-4')->label('Upload Your Product Image'),
             Textarea::make('description')->class('mt-4')->label('Description'),
             Submit::make()->class('mt-5')->label('Create'),
         ]);
-        $categories = Category::all();
         return view('product.create', [
             'form' => $form,
         ]);
@@ -57,18 +58,33 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
-        // dd($request->all());
+        $fileName = null;
+        //has file
+        if ($request->hasFile('images')) {
+            //loop through images
+            foreach ($request->file('images') as $file) {
+                //store file
+                $file->store('public/products');
+                //getFileName
+                $fileName = $file->hashName();
+            }
 
-        //get image from request
-        $image = $request->file('image');
+        }
 
-        dd($image);
-        //get image name
-        $imageName = time().'.'.$image->extension();
-        //move image to public folder
-        $image->move(public_path('images'), $imageName);
+        //create product
+        Product::create([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'price' => $request->price,
+            'stock' => $request->stok,
+            'category_id' => $request->category_id,
+            // 'image' => $fileName,
+            'active' => 1, //default active
+            'description' => $request->description,
+        ]);
 
+        //redirect
+        return redirect()->route('product.index');
 
 
     }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StorefrontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +29,7 @@ Route::middleware('splade')->group(function () {
     // Registers routes to support async File Uploads with Filepond...
     Route::spladeUploads();
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', [StorefrontController::class, 'index'])->name('storefront.index');
 
     Route::middleware('auth')->group(function () {
         Route::get('/dashboard', function () {

@@ -19,4 +19,16 @@ class Product extends Model
         'description',
         'active'
     ];
+
+    //add category relationship
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    //add product image relationship
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
 }

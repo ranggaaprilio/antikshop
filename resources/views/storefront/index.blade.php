@@ -1,4 +1,5 @@
-  <!-- header -->
+<div>
+      <!-- header -->
   <header class="py-4 shadow-sm bg-white">
     <div class="container flex items-center justify-between">
         <a href="route('storefront.index')" class="no-underline">
@@ -26,7 +27,7 @@
                     class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                     8</div>
             </a> --}}
-            <a href="#" class="text-center text-gray-700 hover:text-primary transition relative">
+            <button onclick="openPopUp()" class="text-center text-gray-700 hover:text-primary transition relative">
                 <div class="text-2xl">
                     <i class="fas fa-shopping-cart"></i>
 
@@ -35,7 +36,7 @@
                 <div
                     class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                     2</div>
-            </a>
+            </button>
             {{-- <a href="#" class="text-center text-gray-700 hover:text-primary transition relative">
                 <div class="text-2xl">
                     <i class="fa-regular fa-user"></i>
@@ -97,6 +98,9 @@
     </div>
 </nav>
 <!-- ./navbar -->
+
+<!--- cart -->
+<x-cart.list />
 
 <!-- banner -->
 <div class="bg-cover bg-no-repeat bg-center py-36 px-20" style="background-image: url('/images/banner.jpg');">
@@ -168,6 +172,17 @@
     </div>
 </div>
 <!-- ./copyright -->
+</div>
+
+<!-- pop up -->
+<script>
+    function openPopUp() {
+        const body = document.body;
+        body.classList.add('overflow-y-hidden');
+        document.getElementById('cartSection').classList.remove('hidden');
+
+    }
+</script>
 
 @php
     //create function format product price

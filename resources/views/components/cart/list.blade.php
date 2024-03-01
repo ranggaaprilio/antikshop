@@ -1,5 +1,5 @@
 
-<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true" id="cartSection">
+<div class="relative z-10 hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true" id="cartSection">
     <!--
       Background backdrop, show/hide based on slide-over state.
 

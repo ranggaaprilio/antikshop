@@ -1,3 +1,10 @@
+@php
+    //create function format product price
+    function formatPrice($price){
+        return number_format($price, 0, ',', '.');
+    }
+@endphp
+
 <div>
       <!-- header -->
   <header class="py-4 shadow-sm bg-white">
@@ -126,7 +133,9 @@
         @foreach ($products as $product)
         <div class="bg-white shadow rounded overflow-hidden group">
             <div class="relative">
-                <img src={{asset('storage/products/'.$product->images[0]->path)}} alt="product 1" class="w-full">
+                @if(@$product->images[0])
+                    <img src={{asset('storage/products/'.$product->images[0]->path)}} alt="product 1" class="w-full">
+                @endif
                 <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center
                 justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                     <a href="#"
@@ -153,9 +162,17 @@
                     <div class="text-xs text-gray-500 ">Stok : {{$product->stock}}</div>
                 </div>
             </div>
-            <a href="#"
+            <form method="POST" action={{ route('storefront.addToCart') }}>
+                @csrf
+                <input type="hidden" name="product_id" value="{{$product->id}}">
+                <input type="hidden" name="product_name" value="{{$product->name}}">
+                <input type="hidden" name="product_price" value="{{$product->price}}">
+                <input type="hidden" name="product_qty" value="1">
+                <button type="submit"
                 class="block w-full py-1 text-center text-white bg-blue-500  border border-blue-500 rounded-b hover:bg-transparent hover:text-primary transition">Add
-                to cart</a>
+                to cart</button>
+            </form>
+
         </div>
         @endforeach
 
@@ -184,9 +201,3 @@
     }
 </script>
 
-@php
-    //create function format product price
-    function formatPrice($price){
-        return number_format($price, 0, ',', '.');
-    }
-@endphp

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StorefrontController;
+use App\Http\Middleware\GenerateRequestId;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,22 @@ Route::middleware('splade')->group(function () {
     // Registers routes to support async File Uploads with Filepond...
     Route::spladeUploads();
 
+    //Public routes
     Route::get('/', [StorefrontController::class, 'index'])->name('storefront.index');
+    Route::post('/cart', [StorefrontController::class, 'addToCart'])->middleware(GenerateRequestId::class)->name('storefront.addToCart');
+
+    //for test purpose check session function
+    if(env('APP_ENV') == 'local'){
+        Route::get('/session', function () {
+            dd(session()->all());
+        });
+        //clear session
+        Route::get('/clear', function () {
+            session()->flush();
+            return 'Session cleared';
+        });
+    }
+
 
     Route::middleware('auth')->group(function () {
         Route::get('/dashboard', function () {

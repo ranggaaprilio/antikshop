@@ -17,4 +17,15 @@ class StorefrontController extends Controller
         // dd($products);
         return view('storefront.index',compact('products'));
     }
+
+    public function addToCart(Request $request){
+        //get existing cart from session
+        $cart = session()->get('cart');
+        //merge existing cart with new product
+        $cart[$request->request_id] = $request->all();
+        //store updated cart in session
+        session()->put('cart', $cart);
+        //redirect back to the page
+        return back()->with('success', 'Product added to cart successfully!');
+    }
 }

@@ -1,7 +1,8 @@
 @php
-    //create function format product price
-    function formatPrice($price){
-        return number_format($price, 0, ',', '.');
+    //get cart count
+    $cartCount = 0;
+    if(session()->has('cart')) {
+        $cartCount = count(session('cart'));
     }
 @endphp
 
@@ -34,15 +35,15 @@
                     class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                     8</div>
             </a> --}}
-            <button onclick="openPopUp()" class="text-center text-gray-700 hover:text-primary transition relative">
+            <button onclick="openPopUp()" class="text-center text-gray-700 hover:text-primary transition relative p-3">
                 <div class="text-2xl">
                     <i class="fas fa-shopping-cart"></i>
-
+                    <div
+                    class="absolute p-3 right-2.5 top-1 w-5 h-5 rounded-full flex items-center justify-center bg-red-600 text-white text-xs">
+                    {{$cartCount}}</div>
                 </div>
                 <div class="text-xs leading-3">Keranjang</div>
-                <div
-                    class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                    2</div>
+
             </button>
             {{-- <a href="#" class="text-center text-gray-700 hover:text-primary transition relative">
                 <div class="text-2xl">
@@ -60,7 +61,7 @@
     <div class="container flex">
         <div class="px-8 py-4 bg-primary md:flex items-center cursor-pointer relative group hidden">
             <span class="text-white">
-              <i class="fa-solid fa-bars"></i>
+              <i class="fas fa-bars"></i>
             </span>
             <span class="capitalize ml-2 text-white hidden">All Categories</span>
 
@@ -107,7 +108,7 @@
 <!-- ./navbar -->
 
 <!--- cart -->
-<x-cart.list />
+<x-cart/>
 
 <!-- banner -->
 <div class="bg-cover bg-no-repeat bg-center py-36 px-20" style="background-image: url('/images/banner.jpg');">
@@ -138,16 +139,16 @@
                 @endif
                 <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center
                 justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                    <a href="#"
+                    {{-- <a href="#"
                         class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
                         title="view product">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i class="fas fa-magnifying-glass"></i>
                     </a>
                     <a href="#"
                         class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
                         title="add to wishlist">
                         <i class="fa-solid fa-heart"></i>
-                    </a>
+                    </a> --}}
                 </div>
             </div>
             <div class="pt-4 pb-3 px-4">
@@ -155,7 +156,7 @@
                     <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">{{$product->name}}</h4>
                 </a>
                 <div class="flex items-baseline mb-1 space-x-2">
-                    <p class="text-xl text-primary font-semibold">Rp. {{formatPrice($product->price)}}</p>
+                    <p class="text-xl text-primary font-semibold">Rp. {{$product->price}}</p>
                 </div>
                 <div class="flex items-start flex-col">
                     <div class="text-sm text-gray-500 ">Desc : {{$product->description}}</div>
@@ -169,7 +170,7 @@
                 <input type="hidden" name="product_price" value="{{$product->price}}">
                 <input type="hidden" name="product_qty" value="1">
                 <button type="submit"
-                class="block w-full py-1 text-center text-white bg-blue-500  border border-blue-500 rounded-b hover:bg-transparent hover:text-primary transition">Add
+                class="block w-full py-1 text-center text-white bg-blue-500  border border-blue-500 rounded-b hover:bg-transparent hover:text-blue-500 transition">Add
                 to cart</button>
             </form>
 

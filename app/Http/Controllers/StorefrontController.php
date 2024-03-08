@@ -44,4 +44,11 @@ class StorefrontController extends Controller
         //redirect back to the page
         return back()->with('success', 'Product removed from cart successfully!');
     }
+
+    public function cart(){
+        //get existing cart from session
+        $cart = session()->get('cart');
+        // dd($cart);
+        return view('storefront.cart',compact('cart'));
+    }
 }

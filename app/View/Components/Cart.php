@@ -48,8 +48,6 @@ class Cart extends Component
                     'image' => $product->images->first()->path
                 ];
             }
-
-
         }
 
         return view('components.cart', [

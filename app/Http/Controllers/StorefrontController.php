@@ -46,9 +46,33 @@ class StorefrontController extends Controller
     }
 
     public function cart(){
-        //get existing cart from session
-        $cart = session()->get('cart');
-        // dd($cart);
-        return view('storefront.cart',compact('cart'));
+         //get the cart data from the session
+         $cartSession = session()->get('cart');
+
+
+
+         //get data products with images from the database
+         $carts = [];
+         $subtotal = 0;
+         if ($cartSession) {
+             foreach ($cartSession as $key => $value) {
+                 $product = Product::with('images')->find($value['product_id']);
+                 if (!$product) {
+                     continue;
+                 }
+                 //calculate the subtotal
+                 $subtotal += $product->price * $value['product_qty'];
+                 $carts[] = [
+                     'request_id' => $key, //add request_id to the cart array to use it in the remove from cart functionality
+                     'id' => $product->id,
+                     'name' => $product->name,
+                     'price' => number_format($product->price, 2),
+                     'quantity' => $value['product_qty'],
+                     'description' => $product->description,
+                     'image' => $product->images->first()->path
+                 ];
+             }
+         }
+        return view('storefront.cart',compact('carts','subtotal'));
     }
 }

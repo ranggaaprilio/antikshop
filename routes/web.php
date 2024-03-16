@@ -35,6 +35,7 @@ Route::middleware('splade')->group(function () {
     Route::post('/cart', [StorefrontController::class, 'addToCart'])->middleware(GenerateRequestId::class)->name('storefront.addToCart');
     Route::delete('/removeFromCart/{request_id}', [StorefrontController::class, 'removeFromCart'])->name('storefront.removeFromCart');
     Route::get('/cartPage', [StorefrontController::class, 'cart'])->name('storefront.cart');
+    Route::post('/order', [StorefrontController::class, 'order'])->name('storefront.order');
 
     //for test purpose check session function
     if(env('APP_ENV') == 'local'){

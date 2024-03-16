@@ -11,7 +11,7 @@
                 accusantium perspiciatis, sapiente
                 magni eos dolorum ex quos dolores odio</p>
             <div class="mt-12">
-                <a href="#" class="bg-blue-500 border border-blue-500  border-4 text-white px-8 py-3 font-medium
+                <a href="#" class="bg-blue-500  border-blue-500  border-4 text-white px-8 py-3 font-medium
                 rounded-md">Shop Now</a>
             </div>
         </div>

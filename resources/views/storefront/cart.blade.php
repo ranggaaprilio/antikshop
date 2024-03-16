@@ -15,7 +15,9 @@
 
 <!-- wrapper -->
 <div>
-    <form action="" class="container grid grid-cols-12 items-start pb-16 pt-4 gap-6">
+    <form action={{route('storefront.order')}} method="POST"
+        class="container grid grid-cols-12 items-start pb-16 pt-4 gap-6">
+        @csrf
         <div class="col-span-12 md:col-span-8">
             <div class="border border-gray-200 p-4 rounded mb-3">
                 <h3 class="text-lg font-medium capitalize mb-4">Checkout</h3>
@@ -37,81 +39,72 @@
             </div>
             <div class=" border border-gray-200 p-4 rounded">
                 <h3 class="text-lg font-medium capitalize mb-4">Payment Option</h3>
-                <x-splade-form default="{ plan: 'bca' }">
-                    <div class="grid grid-cols-3 gap-3">
+                <div class="grid grid-cols-3 gap-3">
 
-                        {{-- Plan Basic --}}
-                        <label
-                            class="col-span-3 md:col-span-1 block max-w-sm p-6 bg-white border rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-                            :class="{ 'border-white': form.plan !== 'bca', 'border-green-500': form.plan === 'bca' }">
-                            <img src="{{asset('images/bankLogo/bca.png')}}" alt="logo bca" srcset="" height="100px"
-                                width="150px">
-                            <input type="radio" value="bca" v-model="form.plan" class="sr-only" />
-                            <div class="flex flex-row justify-between items-center mt-2">
-                                <span class="font-bold">Bank BCA</span>
+                    {{-- Plan Basic --}}
+                    <label
+                        class="col-span-3 md:col-span-1 block max-w-sm p-6 bg-white border rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" id="bcaCard">
+                        <img src="{{asset('images/bankLogo/bca.png')}}" alt="logo bca" srcset="" height="100px"
+                            width="150px">
+                        <input type="radio" name="payment_option" value="bca" class="sr-only" />
+                        <div class="flex flex-row justify-between items-center mt-2">
+                            <span class="font-bold">Bank BCA</span>
 
-                                <svg v-show="form.plan === 'bca'" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
+                            <svg  class="w-6 h-6 hidden" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
 
-                            <span class="block text-gray-700 dark:text-gray-400 mt-3 font-normal">7660445000</span>
-                            <span class="block text-gray-700 dark:text-gray-400 mt-1 font-normal">Rangga Aprilio
-                                Utama</span>
-                        </label>
+                        <span class="block text-gray-700 dark:text-gray-400 mt-3 font-normal">7660445000</span>
+                        <span class="block text-gray-700 dark:text-gray-400 mt-1 font-normal">Rangga Aprilio
+                            Utama</span>
+                    </label>
 
-                        {{-- Plan Pro --}}
-                        <label
-                            class="col-span-3 md:col-span-1 block max-w-sm p-6 bg-white border rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-                            :class="{ 'border-white': form.plan !== 'bsi', 'border-green-500': form.plan === 'bsi' }">
-                            <img src="{{asset('images/bankLogo/bsi.png')}}" alt="logo bsi" srcset="" height="100px"
-                                width="150px">
-                            <input type="radio" value="bsi" v-model="form.plan" class="sr-only" />
-                            <div class="flex flex-row justify-between items-center mt-2">
-                                <span class="font-bold">Bank BSI</span>
+                    {{-- Plan Pro --}}
+                    <label
+                        class="col-span-3 md:col-span-1 block max-w-sm p-6 bg-white border rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" id="bsiCard">
+                        <img src="{{asset('images/bankLogo/bsi.png')}}" alt="logo bsi" srcset="" height="100px"
+                            width="150px">
+                        <input type="radio" name="payment_option" value="bsi" class="sr-only" />
+                        <div class="flex flex-row justify-between items-center mt-2">
+                            <span class="font-bold">Bank BSI</span>
 
-                                <svg v-show="form.plan === 'bsi'" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
+                            <svg class="w-6 h-6 hidden" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
 
-                            <span class="block text-gray-700 dark:text-gray-400 mt-3 font-normal">7660445000</span>
-                            <span class="block text-gray-700 dark:text-gray-400 mt-1 font-normal">Rangga Aprilio
-                                Utama</span>
-                        </label>
+                        <span class="block text-gray-700 dark:text-gray-400 mt-3 font-normal">7660445000</span>
+                        <span class="block text-gray-700 dark:text-gray-400 mt-1 font-normal">Rangga Aprilio
+                            Utama</span>
+                    </label>
 
-                        {{-- Plan Pro --}}
-                        <label
-                            class="col-span-3 md:col-span-1 block max-w-sm p-6 bg-white border rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-                            :class="{ 'border-white': form.plan !== 'bjb', 'border-green-500': form.plan === 'bjb' }">
-                            <img src="{{asset('images/bankLogo/bjb.png')}}" alt="logo bjb" srcset="" height="80px"
-                                width="120px">
-                            <input type="radio" value="bjb" v-model="form.plan" class="sr-only" />
-                            <div class="flex flex-row justify-between items-center mt-2">
-                                <span class="font-bold">Bank BJB</span>
+                    {{-- Plan Pro --}}
+                    <label
+                        class="col-span-3 md:col-span-1 block max-w-sm p-6 bg-white border rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" id="bjbcard">
+                        <img src="{{asset('images/bankLogo/bjb.png')}}" alt="logo bjb" srcset="" height="80px"
+                            width="120px">
+                        <input type="radio" name="payment_option" value="bjb" class="sr-only" />
+                        <div class="flex flex-row justify-between items-center mt-2">
+                            <span class="font-bold">Bank BJB</span>
 
-                                <svg v-show="form.plan === 'bjb'" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
+                            <svg  class="w-6 h-6 hidden" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
 
-                            <span class="block text-gray-700 dark:text-gray-400 mt-3 font-normal">7660445000</span>
-                            <span class="block text-gray-700 dark:text-gray-400 mt-1 font-normal">Rangga Aprilio
-                                Utama</span>
-                        </label>
+                        <span class="block text-gray-700 dark:text-gray-400 mt-3 font-normal">7660445000</span>
+                        <span class="block text-gray-700 dark:text-gray-400 mt-1 font-normal">Rangga Aprilio
+                            Utama</span>
+                    </label>
 
-                    </div>
-                </x-splade-form>
-
-
-
-
+                </div>
             </div>
         </div>
 
@@ -169,3 +162,24 @@
 
 </div>
 <!-- ./wrapper -->
+
+<script>
+   //javascript document ready function
+    document.addEventListener('DOMContentLoaded', function() {
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+        radio.addEventListener('click', function () {
+            //add class border-green-500 on selected card based on tag label
+            radios.forEach(radio => {
+                radio.parentElement.classList.remove('border-green-500');
+                //add hidden display on svg icon
+                radio.parentElement.querySelector('svg').classList.add('hidden');
+            })
+            this.parentElement.classList.add('border-green-500');
+            this.parentElement.querySelector('svg').classList.remove('hidden');
+
+        })
+    })
+    });
+
+</script>

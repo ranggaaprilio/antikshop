@@ -29,6 +29,7 @@ class CreateProductForm extends AbstractForm
             Input::make('slug')->class('mt-4')->label('Slug'),
             Input::make('price')->class('mt-4')->label('Price'),
             Input::make('stok')->class('mt-4')->label('Stok'),
+            Input::make('size')->class('mt-4')->label('Size'),
             Select::make('category_id')->class('mt-4')->label('Category')->options(Category::all()->pluck('name', 'id')->toArray()),
             File::make('images[]')->multiple()->filepond()->preview()->class('mt-4')->label('Upload Your Product Image'),
             Textarea::make('description')->class('mt-4')->label('Description'),

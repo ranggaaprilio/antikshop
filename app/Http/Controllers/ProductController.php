@@ -51,6 +51,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'stock' => $request->stok,
             'category_id' => $request->category_id,
+            'size' => $request->size,
             // 'image' => $fileName,
             'active' => 1, //default active
             'description' => $request->description,

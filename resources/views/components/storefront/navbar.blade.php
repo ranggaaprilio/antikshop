@@ -10,13 +10,13 @@
           <!-- header -->
   <header class="py-4 shadow-sm bg-white">
     <div class="container flex items-center justify-between">
-        <a href="route('storefront.index')" class="no-underline">
+        <a href={{route('storefront.index')}}  class="no-underline">
             <span class="text-2xl font-medium text-gray-800 px-5">Antik Store</span>
         </a>
 
         <div class="w-full max-w-xl relative flex">
             <span class="absolute left-4 top-3 text-lg text-gray-400">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fas fa-search"></i>
             </span>
             <input type="text" name="search" id="search"
                 class="w-full border border-primary border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none hidden md:flex"
@@ -98,7 +98,7 @@
         <div class="flex items-center justify-between flex-grow md:pl-12 py-5">
             <div class="flex items-center space-x-6 capitalize">
                 <a href={{route('storefront.index')}} class="text-gray-200 hover:text-white transition">Home</a>
-                <a href="pages/shop.html" class="text-gray-200 hover:text-white transition">Shop</a>
+                <a href="#" class="text-gray-200 hover:text-white transition">Shop</a>
                 <a href="#" class="text-gray-200 hover:text-white transition">About us</a>
                 <a href="#" class="text-gray-200 hover:text-white transition">Contact us</a>
             </div>

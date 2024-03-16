@@ -137,14 +137,18 @@
                 <p>Rp. {{number_format($subtotal)}}</p>
             </div>
 
-            <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
+            {{-- <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
                 <p>shipping</p>
                 <p>Free</p>
-            </div>
+            </div> --}}
 
             <div class="flex justify-between text-gray-800 font-medium py-3 uppercas">
                 <p class="font-semibold">Total</p>
                 <p>Rp. {{number_format($subtotal)}}</p>
+            </div>
+
+            <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
+                <span class="text-sm font-bold text-red-700 italic">*Harga belum termasuk ongkir</span>
             </div>
 
             {{-- <div class="flex items-center mb-4 mt-2">
@@ -159,6 +163,7 @@
                 Via Whatsapp</button>
         </div>
     </form>
+
 
 </div>
 <!-- ./wrapper -->

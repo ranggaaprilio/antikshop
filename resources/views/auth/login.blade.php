@@ -16,7 +16,7 @@
                     </Link>
                 @endif
 
-                <x-splade-submit class="ml-3" :label="__('Log in')" />
+                <x-splade-submit class="ml-3 bg-primary" :label="__('Log in')" />
             </div>
         </x-splade-form>
     </x-auth-card>

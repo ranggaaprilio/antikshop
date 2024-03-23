@@ -1598,6 +1598,14 @@ h1, h2, h3, h4, h5, h6 {
   color: rgb(253 61 87 / var(--tw-text-opacity));
 }
 
+.text-3-overflow {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .text-yellow-400 {
   --tw-text-opacity: 1;
   color: rgb(250 204 21 / var(--tw-text-opacity));

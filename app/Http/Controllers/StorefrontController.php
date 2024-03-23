@@ -21,14 +21,22 @@ class StorefrontController extends Controller
     {
         //get 4 last products from database with category and images
         $products = Product::with('category', 'images')->latest()->take(2)->get();
+        $allProducts = Product::with('category', 'images')->get();
 
         //format price
         foreach($products as $product){
             $product->price = number_format($product->price, 2);
         }
 
+
+        foreach($allProducts as $productData){
+            if($productData->price){
+                $productData->price = number_format($productData->price, 2);
+            }
+        }
+
         // dd($products);
-        return view('storefront.index',compact('products'));
+        return view('storefront.index',compact('products','allProducts'));
     }
 
     public function addToCart(Request $request){
@@ -162,5 +170,11 @@ class StorefrontController extends Controller
         $url = "https://api.whatsapp.com/send?phone=".$waNumber."&text=".urlencode($message);
         return redirect()->away($url);
 
+    }
+
+    public function detail($id){
+        $product = Product::with('category', 'images')->find($id);
+        $product->price = number_format($product->price, 2);
+        return view('storefront.detail',compact('product'));
     }
 }
